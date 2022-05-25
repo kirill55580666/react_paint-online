@@ -8,6 +8,9 @@ import Brush from "../tools/Brush";
 import Rect from "../tools/Rect";
 import toolState from "../store/toolState";
 import axios from 'axios'
+import Circle from "../tools/Circle";
+import Eraser from "../tools/Eraser";
+import Line from "../tools/Line";
 
 
 const Canvas = observer(() => {
@@ -55,6 +58,9 @@ const Canvas = observer(() => {
                         drawHandler(msg)
                         break
 
+                    default:
+                        break
+
                 }
             }
         }
@@ -66,13 +72,25 @@ const Canvas = observer(() => {
         const ctx = canvasRef.current.getContext('2d')
         switch (figure.type) {
             case "brush":
-                Brush.draw(ctx, figure.x, figure.y)
+                Brush.draw(ctx, figure.x, figure.y, figure.color)
                 break
             case 'rect':
                 Rect.staticDraw(ctx, figure.x, figure.y, figure.width, figure.height, figure.color)
                 break
+            case 'circle':
+                Circle.staticDraw(ctx, figure.x, figure.y, figure.r)
+                break
+            case "eraser":
+                Eraser.draw(ctx, figure.x, figure.y, figure.color)
+                break
+            case 'line':
+                Line.staticDraw(ctx, figure.x, figure.y, figure.color)
+                break
             case "finish":
                 ctx.beginPath();
+                break;
+            default:
+
                 break;
         }
     }
