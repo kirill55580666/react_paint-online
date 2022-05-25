@@ -1,0 +1,66 @@
+@import 'variables';
+
+.toolbar {
+  height: $toolbar-height;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+  z-index: 999;
+  &__button {
+    width: 25px;
+    height: 25px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  .brush {
+    background: url("../assets/brush.svg") no-repeat center;
+  }
+  .rect {
+    background: url("../assets/rect.svg") no-repeat center;
+  }
+  .circle {
+    background: url("../assets/circle.svg") no-repeat center;
+  }
+  .eraser {
+    background: url("../assets/eraser.svg") no-repeat center;
+  }
+  .line {
+    background: url("../assets/line.svg") no-repeat center;
+  }
+  .undo {
+    margin-left: auto;
+    background: url("../assets/undo.svg") no-repeat center;
+  }
+  .redo {
+    background: url("../assets/redo.svg") no-repeat center;
+  }
+  .save {
+    margin-right: 10px;
+    background: url("../assets/save.svg") no-repeat center;
+  }
+  .color {
+    background: white;
+  }
+}
+
+.setting-bar {
+  height: $toolbar-height;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: $toolbar-height;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+  z-index: 998;
+}
