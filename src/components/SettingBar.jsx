@@ -6,7 +6,7 @@ const SettingBar = () => {
 
     const changeStrokeColor = useDebounce( (e) => {
         if(toolState.tool) {
-            toolState.setFillColor(e.target.value);
+            //toolState.setFillColor(e.target.value);
             toolState.setStrokeColor(e.target.value);
         }
     }, 100)

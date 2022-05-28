@@ -40,13 +40,15 @@ export default class Eraser extends Tool {
                     type: 'eraser',
                     x: e.pageX - e.target.offsetLeft,
                     y: e.pageY - e.target.offsetTop,
-                    color: '#fff'
+                    color: '#fff',
+                    lineWidth: this.ctx.lineWidth
                 }
             }))
         }
     }
 
-    static draw(ctx, x, y, color) {
+    static draw(ctx, x, y, color, lineWidth) {
+        ctx.lineWidth = lineWidth
         let prevColor = ctx.strokeStyle
         ctx.strokeStyle = color;
         ctx.lineTo(x, y);

@@ -13,7 +13,7 @@ class ToolState {
         this.tool.fillColor= color
     }
     setStrokeColor(color) {
-        this.tool.strokeColor = color
+        this.tool.strokeStyle = color
     }
     setLineWidth(width) {
         this.tool.lineWidth = width

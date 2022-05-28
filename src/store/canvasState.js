@@ -12,6 +12,14 @@ class canvasState {
         makeAutoObservable(this);
     }
 
+    setUndoList(undoList) {
+        this.undoList = undoList;
+    }
+
+    setRedoList(redoList) {
+        this.redoList = redoList;
+    }
+
     setSessionId(id) {
         this.sessionid = id
     }
@@ -53,17 +61,17 @@ class canvasState {
 
     redo() { //вперед
         let ctx = this.canvas.getContext('2d')
-        if(this.redoList.length > 0) {
+        if (this.redoList.length > 0) {
             let dataUrl = this.redoList.pop()
             this.undoList.push(this.canvas.toDataURL())
-            let img = new Image()
-            img.src = dataUrl
-            img.onload = () => {
-                ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-                ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
+                let img = new Image()
+                img.src = dataUrl
+                img.onload = () => {
+                    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+                    ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
+                }
             }
         }
-    }
 
 }
 

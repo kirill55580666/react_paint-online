@@ -14,19 +14,40 @@ const Toolbar = () => {
     const changeColor = useDebounce( (e) => {
         if(toolState.tool) {
             toolState.setFillColor(e.target.value);
-            toolState.setStrokeColor(e.target.value);
+            //toolState.setStrokeColor(e.target.value);
         }
     }, 100)
 
     const download = () => {
         const dataUrl = canvasState.canvas.toDataURL()
-        console.log(dataUrl);
         const a = document.createElement('a')
         a.href = dataUrl
         a.download = canvasState.sessionid + ".jpg"
         document.body.appendChild(a)
         a.click()
         document.body.removeChild(a)
+    }
+
+    const serverUndo = () => {
+        //canvasState.undo()
+        canvasState.socket.send(JSON.stringify({
+            method: 'undo',
+            id: canvasState.sessionid,
+            undoList: canvasState.undoList,
+            redoList: canvasState.redoList
+        }));
+
+    }
+
+    const serverRedo = () => {
+        //canvasState.redo()
+        canvasState.socket.send(JSON.stringify({
+            method: 'redo',
+            id: canvasState.sessionid,
+            undoList: canvasState.undoList,
+            redoList: canvasState.redoList
+        }));
+
     }
 
     return (
@@ -57,11 +78,11 @@ const Toolbar = () => {
                 className='toolbar__button color'
             />
             <button
-                onClick={() => canvasState.undo()}
+                onClick={() => serverUndo()}
                 className='toolbar__button undo'
             />
             <button
-                onClick={() => canvasState.redo()}
+                onClick={() => serverRedo()}
                 className='toolbar__button redo'
             />
             <button className='toolbar__button save'

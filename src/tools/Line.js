@@ -22,11 +22,12 @@ export default class Line extends Tool {
             id: this.id,
             figure: {
                 type: 'line',
-                x: this.startX,
-                y: this.startY,
-                width: this.width,
-                height: this.height,
-                color: this.ctx.fillStyle
+                startX: this.startX,
+                startY: this.startY,
+                currentX: this.currentX,
+                currentY: this.currentY,
+                color: this.strokeStyle,
+                lineWidth: this.ctx.lineWidth
             }
         }))
     }
@@ -40,9 +41,9 @@ export default class Line extends Tool {
     }
     mouseMoveHandler(e) {
         if(this.mouseDown) {
-            let currentX = e.pageX - e.target.offsetLeft;
-            let currentY = e.pageY - e.target.offsetTop;
-            this.draw(currentX, currentY); // координата курсора на хосте
+            this.currentX = e.pageX - e.target.offsetLeft;
+            this.currentY = e.pageY - e.target.offsetTop;
+            this.draw(this.currentX, this.currentY); // координата курсора на хосте
         }
     }
 
@@ -60,13 +61,15 @@ export default class Line extends Tool {
         }
     }
 
-    static staticDraw(ctx, x, y, color) {
+    static staticDraw(ctx, startX, startY, currentX, currentY, color, lineWidth) {
         ctx.beginPath()
-        ctx.fillStyle(color)
-        ctx.moveTo(this.startX, this.startY )
-        ctx.lineTo(x, y)
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth
+        ctx.moveTo(startX, startY )
+        ctx.lineTo(currentX, currentY)
         ctx.fill()
         ctx.stroke()
+        ctx.beginPath()
     }
 
 }
